@@ -1,0 +1,45 @@
+﻿<Window x:Class="SecNotify.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SecNotify"
+        mc:Ignorable="d"
+        Title="Security Pager" Height="320" Width="650" ResizeMode="NoResize">
+    <Border Margin="20">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="1.75*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="0 10 0 0">
+                <TextBlock Text="Security will be immediately paged to:" FontFamily="Arial" FontSize="12" Margin="0 0 0 5"/>
+                <TextBlock Name="tbox911Location" Text="LOCATION" FontFamily="Arial" FontSize="20" FontWeight="Bold" Background="#ddd" Padding="4"/>
+                <Button Name="btnPageSecurity911" Margin="5 20 5 0" Padding="20 20" Background="#FF990000" FontSize="30" FontFamily="Arial" Foreground="White" Click="btnPageSecurity911_Click" >
+                    <TextBlock Text="PAGE SECURITY 911" TextWrapping="Wrap" TextAlignment="Center"/>
+                </Button>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <Border BorderBrush="#bbb" BorderThickness="2" Margin="20 0 0 0">
+                    <StackPanel Margin="20">
+                        <TextBlock Margin="0 0 0 10" Text="Enter nonurgent message for security." FontFamily="Arial" FontSize="12"/>
+                        <TextBlock Margin="0 0 0 2" Text="Your message will automatically include:" FontFamily="Arial" FontSize="12"/>
+                        <StackPanel  Margin="0 0 0 2" Orientation="Horizontal">
+                            <TextBlock Text="Location: " FontFamily="Arial" FontSize="12"/>
+                            <TextBlock Name="tboxLocation" Text="ED-FRONT-DESK" FontFamily="Arial" FontSize="12" FontWeight="Bold"/>
+                        </StackPanel>
+                        <StackPanel Margin="0 0 0 2" Orientation="Horizontal">
+                            <TextBlock Text="Phone #: " FontFamily="Arial" FontSize="12"/>
+                            <TextBlock Name="tboxPhone" Text="xxx-xxx-xxxx" FontFamily="Arial" FontSize="12" FontWeight="Bold"/>
+                        </StackPanel>
+                        <TextBox Padding="2" Margin="0 10 0 2" Name="txtMessage"/>
+                        <TextBlock Name="tboxCharCount" Text="110 characters remaining" FontFamily="Arial" FontSize="10" />
+                        <Button HorizontalAlignment="Right" Name="btnSendMsg" MinWidth="62" Click="btnSendMsg_Click">Submit</Button>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+            <Button Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Name="btnAdmin" MinWidth="107" Click="btnAdmin_Click">Admin Controls</Button>
+        </Grid>
+    </Border>
+</Window>
