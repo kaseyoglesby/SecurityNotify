@@ -1,0 +1,20 @@
+﻿<Window x:Class="SecNotify.ChooseLocation"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SecNotify"
+        mc:Ignorable="d"
+        Title="Choose Location" Height="160" Width="300" ResizeMode="NoResize">
+    <Border Margin="20">
+        <StackPanel VerticalAlignment="Center">
+            <TextBlock Text="Select your current location:" FontFamily="Arial" FontSize="12"/>
+            <ComboBox Name="cmbLocations" Margin="0 2 0 18">
+                <ComboBoxItem>ED Front Desk</ComboBoxItem>
+                <ComboBoxItem>ED Nurse Station</ComboBoxItem>
+                <ComboBoxItem>OB Main Desk</ComboBoxItem>
+            </ComboBox>
+            <Button Name="btnSubmitLocation" Click="btnSubmitLocation_Click">Submit</Button>
+        </StackPanel>
+    </Border>
+</Window>

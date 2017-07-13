@@ -32,8 +32,8 @@
                             <TextBlock Text="Phone #: " FontFamily="Arial" FontSize="12"/>
                             <TextBlock Name="tboxPhone" Text="xxx-xxx-xxxx" FontFamily="Arial" FontSize="12" FontWeight="Bold"/>
                         </StackPanel>
-                        <TextBox Padding="2" Margin="0 10 0 2" Name="txtMessage"/>
-                        <TextBlock Name="tboxCharCount" Text="110 characters remaining" FontFamily="Arial" FontSize="10" />
+                        <TextBox Padding="2" Name="txtMessage" MaxLength="110"/>
+                        <TextBlock Name="tboxCharCount" Margin="0 2" Text="{Binding Path=Text.Length, ElementName=txtMessage, StringFormat={}{0}/110 characters}" FontFamily="Arial" FontSize="10" />
                         <Button HorizontalAlignment="Right" Name="btnSendMsg" MinWidth="62" Click="btnSendMsg_Click">Submit</Button>
                     </StackPanel>
                 </Border>

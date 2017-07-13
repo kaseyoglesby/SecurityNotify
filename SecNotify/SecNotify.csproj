@@ -57,10 +57,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ChooseLocation.xaml.cs">
+      <DependentUpon>ChooseLocation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Clickatell_Service\Api.cs" />
     <Compile Include="Clickatell_Service\Rest.cs" />
-    <Compile Include="Clickatell_Service\SMS.cs" />
+    <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\SMS.cs" />
+    <Compile Include="Data\LocationData.cs" />
+    <Compile Include="Data\LocationDataImporter.cs" />
     <Compile Include="Resources\Secret.cs" />
+    <Page Include="ChooseLocation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -92,6 +102,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Data\locations.csv" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -107,5 +118,6 @@
   <ItemGroup>
     <Content Include=".gitignore" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

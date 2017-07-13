@@ -1,7 +1,8 @@
-﻿using SecNotify.Resources;
+﻿using Clickatell_Service;
+using SecNotify.Resources;
 using System.Collections.Generic;
 
-namespace Clickatell_Service
+namespace SecNotify.Models
 {
     public class SMS
     {

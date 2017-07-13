@@ -1,4 +1,5 @@
 ﻿using Clickatell_Service;
+using SecNotify.Models;
 using SecNotify.Resources;
 using System;
 using System.Windows;
@@ -19,7 +20,9 @@ namespace SecNotify
         {
             SMS sms = new SMS
             {
-                Content = "** 911 ** 911 ** 911 **%0aStill not an asshole",
+                Content = ("|| 911 ** 911 ** 911 ||%0a"
+                           + "|| " + tbox911Location.Text + " ||%0a"
+                           + "EMERGENCY - REPORT IMMEDIATELY")
             };
 
             Secret recipient = new Secret();
@@ -35,8 +38,8 @@ namespace SecNotify
                 SMS sms = new SMS
                 {
                     Content = ("|| " + tboxLocation.Text + " ||%0a"
-                               + "|| " + tboxPhone.Text + " ||%0a"
-                               + txtMessage.Text),
+                             + "|| " + tboxPhone.Text + " ||%0a"
+                             + txtMessage.Text),
                 };
 
                 Secret recipient = new Secret();
