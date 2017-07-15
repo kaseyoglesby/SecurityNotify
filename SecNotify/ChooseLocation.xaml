@@ -9,11 +9,7 @@
     <Border Margin="20">
         <StackPanel VerticalAlignment="Center">
             <TextBlock Text="Select your current location:" FontFamily="Arial" FontSize="12"/>
-            <ComboBox Name="cmbLocations" Margin="0 2 0 18">
-                <ComboBoxItem>ED Front Desk</ComboBoxItem>
-                <ComboBoxItem>ED Nurse Station</ComboBoxItem>
-                <ComboBoxItem>OB Main Desk</ComboBoxItem>
-            </ComboBox>
+            <ComboBox Name="cmbLocations" Margin="0 2 0 18" ItemsSource="{Binding}" />
             <Button Name="btnSubmitLocation" Click="btnSubmitLocation_Click">Submit</Button>
         </StackPanel>
     </Border>

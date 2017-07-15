@@ -1,5 +1,7 @@
 ﻿using Clickatell_Service;
+using Newtonsoft.Json;
 using SecNotify.Resources;
+using System;
 using System.Collections.Generic;
 
 namespace SecNotify.Models
@@ -7,7 +9,7 @@ namespace SecNotify.Models
     public class SMS
     {
         public string Content { get; set; }
-        public string Response { get; set; }
+        public Response Response { get; set; }
 
         public void Send(Secret recipient)
         {
@@ -20,8 +22,10 @@ namespace SecNotify.Models
             Params.Add("to", recipient.Phone);
 
             response = Api.SendSMS(api, Params);
+            Response responseJSON = JsonConvert.DeserializeObject<Response>(response);
 
-            this.Response = response;
+            this.Response = responseJSON;
+
         }
     }
 }

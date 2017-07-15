@@ -17,9 +17,13 @@ namespace SecNotify.Data
                 return;
             }
 
+            string filePath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory);
+            filePath = Directory.GetParent(Directory.GetParent(filePath).FullName).FullName;
+            filePath += @"\locations.csv";
+
             List<string[]> rows = new List<string[]>();
 
-            using (StreamReader reader = File.OpenText("D:/Documents/LC101/SecNotify/SecNotify/Data/locations.csv"))
+            using (StreamReader reader = File.OpenText(filePath))
             {
                 while (reader.Peek() >= 0)
                 {
@@ -38,15 +42,14 @@ namespace SecNotify.Data
             /**
              * Parse each row array into a Location object.
              * Assumes CSV column ordering: 
-             *      name,displayphone,SMSphone
+             *      name,phone
              */
             foreach (string[] row in rows)
             {
                 Location newLocation = new Location
                 {
                     Name = row[0],
-                    DisplayPhone = row[1],
-                    SMSPhone = row[2]
+                    Phone = row[1]
                 };
                 locationData.Locations.Add(newLocation);
             }

@@ -26,18 +26,28 @@ namespace SecNotify
         public ChooseLocation()
         {
             InitializeComponent();
+            BindComboBox(cmbLocations);
 
+        }
+
+        public void BindComboBox(ComboBox cmbLocations)
+        {
+            cmbLocations.ItemsSource = locationData.Locations;
+            cmbLocations.DisplayMemberPath = "Name";
+            cmbLocations.SelectedValuePath = "ID";
         }
 
         private void btnSubmitLocation_Click(object sender, RoutedEventArgs e)
         {
+
             if (cmbLocations.SelectedIndex == -1) {
                 MessageBoxResult popup = MessageBox.Show(this, "Please select your current location.", "Message Error", MessageBoxButton.OK, MessageBoxImage.Error);
             } 
-            else {
+            else
+            {
                 Location selectedLocation = new Location();
                 selectedLocation = locationData.Find(cmbLocations.SelectedIndex);
-                var mainWindow = new MainWindow();
+                var mainWindow = new MainWindow(selectedLocation);
                 mainWindow.Show();
                 this.Close();
             }

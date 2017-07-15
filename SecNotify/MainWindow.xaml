@@ -14,7 +14,9 @@
             </Grid.ColumnDefinitions>
             <StackPanel Margin="0 10 0 0">
                 <TextBlock Text="Security will be immediately paged to:" FontFamily="Arial" FontSize="12" Margin="0 0 0 5"/>
-                <TextBlock Name="tbox911Location" Text="LOCATION" FontFamily="Arial" FontSize="20" FontWeight="Bold" Background="#ddd" Padding="4"/>
+                <TextBlock Name="tbox911Location" Text="{Binding Path=CurrentLocation.Name,
+                                                         RelativeSource={RelativeSource Mode=FindAncestor,
+                                                         AncestorType=Window}}" FontFamily="Arial" FontSize="20" FontWeight="Bold" Background="#ddd" Padding="4" />
                 <Button Name="btnPageSecurity911" Margin="5 20 5 0" Padding="20 20" Background="#FF990000" FontSize="30" FontFamily="Arial" Foreground="White" Click="btnPageSecurity911_Click" >
                     <TextBlock Text="PAGE SECURITY 911" TextWrapping="Wrap" TextAlignment="Center"/>
                 </Button>
@@ -26,11 +28,15 @@
                         <TextBlock Margin="0 0 0 2" Text="Your message will automatically include:" FontFamily="Arial" FontSize="12"/>
                         <StackPanel  Margin="0 0 0 2" Orientation="Horizontal">
                             <TextBlock Text="Location: " FontFamily="Arial" FontSize="12"/>
-                            <TextBlock Name="tboxLocation" Text="ED-FRONT-DESK" FontFamily="Arial" FontSize="12" FontWeight="Bold"/>
+                            <TextBlock Name="tboxLocation" Text="{Binding Path=CurrentLocation.Name,
+                                                                  RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                  AncestorType=Window}}" FontFamily="Arial" FontSize="12" FontWeight="Bold"/>
                         </StackPanel>
                         <StackPanel Margin="0 0 0 2" Orientation="Horizontal">
                             <TextBlock Text="Phone #: " FontFamily="Arial" FontSize="12"/>
-                            <TextBlock Name="tboxPhone" Text="xxx-xxx-xxxx" FontFamily="Arial" FontSize="12" FontWeight="Bold"/>
+                            <TextBlock Name="tboxPhone" Text="{Binding Path=CurrentLocation.Phone,
+                                                               RelativeSource={RelativeSource Mode=FindAncestor,
+                                                               AncestorType=Window}}" FontFamily="Arial" FontSize="12" FontWeight="Bold"/>
                         </StackPanel>
                         <TextBox Padding="2" Name="txtMessage" MaxLength="110"/>
                         <TextBlock Name="tboxCharCount" Margin="0 2" Text="{Binding Path=Text.Length, ElementName=txtMessage, StringFormat={}{0}/110 characters}" FontFamily="Arial" FontSize="10" />

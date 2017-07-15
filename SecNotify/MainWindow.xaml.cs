@@ -11,9 +11,12 @@ namespace SecNotify
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public Location CurrentLocation { get; set; }
+
+        public MainWindow(Location location)
         {
             InitializeComponent();
+            CurrentLocation = location;
         }
 
         private void btnPageSecurity911_Click(object sender, RoutedEventArgs e)
@@ -21,14 +24,14 @@ namespace SecNotify
             SMS sms = new SMS
             {
                 Content = ("|| 911 ** 911 ** 911 ||%0a"
-                           + "|| " + tbox911Location.Text + " ||%0a"
+                           + "|| " + this.CurrentLocation.Name + " ||%0a"
                            + "EMERGENCY - REPORT IMMEDIATELY")
             };
 
             Secret recipient = new Secret();
             sms.Send(recipient);
             MessageBoxResult popup = MessageBox.Show(this, "Message successfully sent.", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
-            Console.WriteLine(sms.Response);
+
         }
 
         private void btnSendMsg_Click(object sender, RoutedEventArgs e)
@@ -37,16 +40,23 @@ namespace SecNotify
             {
                 SMS sms = new SMS
                 {
-                    Content = ("|| " + tboxLocation.Text + " ||%0a"
-                             + "|| " + tboxPhone.Text + " ||%0a"
+                    Content = ("|| " + this.CurrentLocation.Name + " ||%0a"
+                             + "|| " + this.CurrentLocation.Phone + " ||%0a"
                              + txtMessage.Text),
                 };
 
                 Secret recipient = new Secret();
                 sms.Send(recipient);
-                MessageBoxResult popup = MessageBox.Show(this, "Message successfully sent.", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
-                txtMessage.Text = "";
-                Console.WriteLine(sms.Response);
+                if (sms.Response.messages[0].accepted || (String.IsNullOrEmpty(sms.Response.messages[0].error.ToString())))
+                {
+                    MessageBoxResult popup = MessageBox.Show(this, "Message successfully sent.", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
+                    txtMessage.Text = "";
+                }
+                else
+                {
+                    MessageBoxResult popup = MessageBox.Show(this, "Message not sent. Please try again.", "Message Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
             }
             else
             {
