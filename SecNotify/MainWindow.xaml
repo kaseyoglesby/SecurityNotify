@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:SecNotify"
         mc:Ignorable="d"
         Title="Security Pager" Height="320" Width="650" ResizeMode="NoResize">
+    <Window.InputBindings>
+        <KeyBinding Key="Return" Modifiers="Ctrl" Command="{Binding Execute911}" />
+    </Window.InputBindings>
     <Border Margin="20">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -45,7 +48,12 @@
                 </Border>
 
             </StackPanel>
-            <Button Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Name="btnAdmin" MinWidth="107" Click="btnAdmin_Click">Admin Controls</Button>
+            <StackPanel  Grid.Column="1" VerticalAlignment="Bottom">
+                <TextBlock Margin="20 0 0 20" Name="tboxInternetConnection" Text="{Binding Path=InternetStatusMessage,
+                                                                  RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                  AncestorType=Window}}" FontFamily="Arial" FontSize="18" FontWeight="Bold" Foreground="#FF990000"/>
+                <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Name="btnAdmin" MinWidth="107" Click="btnAdmin_Click">Admin Controls</Button>
+            </StackPanel>
         </Grid>
     </Border>
 </Window>

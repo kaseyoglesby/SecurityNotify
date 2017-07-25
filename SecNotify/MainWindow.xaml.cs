@@ -3,6 +3,8 @@ using SecNotify.Models;
 using SecNotify.Resources;
 using System;
 using System.Windows;
+using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace SecNotify
 {
@@ -12,11 +14,23 @@ namespace SecNotify
     public partial class MainWindow : Window
     {
         public Location CurrentLocation { get; set; }
+        public string InternetStatusMessage { get; set; }
 
         public MainWindow(Location location)
         {
             InitializeComponent();
             CurrentLocation = location;
+
+            SMS checkInternet = new SMS();
+            if (checkInternet.HasInternet())
+            {
+                InternetStatusMessage = "";
+            }
+            else
+            {
+                InternetStatusMessage = "NO INTERNET CONNECTION DETECTED";
+            }
+
         }
 
         private void btnPageSecurity911_Click(object sender, RoutedEventArgs e)
@@ -29,9 +43,15 @@ namespace SecNotify
             };
 
             Secret recipient = new Secret();
-            sms.Send(recipient);
-            MessageBoxResult popup = MessageBox.Show(this, "Message successfully sent.", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
-
+            if (sms.HasInternet())
+            {
+                sms.Send(recipient);
+                SentResponse(sms);
+            }
+            else
+            {
+                MessageBoxResult popup = MessageBox.Show(this, "No internet connection detected. Use physical panic button.", "Message Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void btnSendMsg_Click(object sender, RoutedEventArgs e)
@@ -46,15 +66,14 @@ namespace SecNotify
                 };
 
                 Secret recipient = new Secret();
-                sms.Send(recipient);
-                if (sms.Response.messages[0].accepted || (String.IsNullOrEmpty(sms.Response.messages[0].error.ToString())))
+                if (sms.HasInternet())
                 {
-                    MessageBoxResult popup = MessageBox.Show(this, "Message successfully sent.", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
-                    txtMessage.Text = "";
+                    sms.Send(recipient);
+                    SentResponse(sms);
                 }
                 else
                 {
-                    MessageBoxResult popup = MessageBox.Show(this, "Message not sent. Please try again.", "Message Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBoxResult popup = MessageBox.Show(this, "No internet connection detected.\nPlease use another method to contact security.", "Message Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
             }
@@ -68,6 +87,19 @@ namespace SecNotify
         private void btnAdmin_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult popup = MessageBox.Show(this, "Admin controls coming soon!", "Coming Soon", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void SentResponse(SMS sms)
+        {
+            if (sms.Response.messages[0].accepted || (String.IsNullOrEmpty(sms.Response.messages[0].error.ToString())))
+            {
+                MessageBoxResult popup = MessageBox.Show(this, "Message successfully sent.", "Confirmation", MessageBoxButton.OK, MessageBoxImage.Information);
+                txtMessage.Text = "";
+            }
+            else
+            {
+                MessageBoxResult popup = MessageBox.Show(this, "Message not sent. Please try again.", "Message Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
