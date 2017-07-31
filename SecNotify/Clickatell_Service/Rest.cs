@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Clickatell_Service
 {
+
     class Rest
     {
         //This takes the API Key and JSON array of data and posts it to the Message URL to send the SMS's
@@ -27,6 +28,7 @@ namespace Clickatell_Service
                 streamWriter.Close();
             }
 
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;  // UPDATED TO RESTORE FUNCTIONALITY
             var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
